@@ -188,7 +188,7 @@ class PlayerClient():
         move = self.player.play()
         req_set_move = self.player_connect.method.set_player_move(self.player.get_player_id(), move)
         set_move = req_set_move()
-        result = "Move wasn't set..."
+        result = "..."
         if set_move:
             result = "Move has been set!"
             self.player.set_ready()
@@ -209,12 +209,12 @@ class PlayerClient():
             print "There isn't a match for you to get results from."
             pass
         if round_results == 1:  # The opposite player hasn't submitted a move, wait a few second and try again
-            time.sleep(3)
+            time.sleep(1)
             return self.get_round_results()
         if round_results:  # If we are handed back a tuple, print them
-            print "round_results::> " + str(round_results)
+            print "round_results::> " + str((round_results[0], round_results[1]))
             if round_results[2]:  # Checks last spot in the tuple for another round or not
-                time.sleep(5)
+                time.sleep(3)
                 self.submit_move()  # Submits a move
             return round_results
         else:
